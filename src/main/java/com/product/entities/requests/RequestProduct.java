@@ -11,9 +11,9 @@ public class RequestProduct {
 	public double discountedPrice;
 	
 	
-	long brandId;
+	private long brandId;
 	
-	long categoryId;
+	private long categoryId;
 
 	public long getBrandId() {
 		return brandId;
@@ -56,6 +56,8 @@ public class RequestProduct {
 	public void setDiscountedPrice(double discountedPrice) {
 		this.discountedPrice = discountedPrice;
 	}
+	
+	
 	
 	
 }

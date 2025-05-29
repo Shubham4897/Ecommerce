@@ -71,14 +71,28 @@ public class Product {
 	public void setUpdatedDate(String updatedDate) {
 		this.updatedDate = updatedDate;
 	}
-	public void setBrand(Brand brand2) {
-		
-		
+//	public void setBrand(Brand brand2) {
+//		
+//		
+//	}
+//	public void setCategory(Category category2) {
+//		
+//		
+//	}
+	public Brand getBrand() {
+		return brand;
 	}
-	public void setCategory(Category category2) {
-		
-		
+	public void setBrand(Brand brand) {
+		this.brand = brand;
 	}
+	public Category getCategory() {
+		return category;
+	}
+	public void setCategory(Category category) {
+		this.category = category;
+	}
+	
+	
 	
 
 }

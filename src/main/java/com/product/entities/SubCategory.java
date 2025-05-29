@@ -52,9 +52,8 @@ public class SubCategory {
 	public void setUpdateDate(String updateDate) {
 		this.updateDate = updateDate;
 	}
-	public void setCategory(Category category2) {
-		// TODO Auto-generated method stub
-		
+	public void setCategory(Category category) {
+		this.category = category;		
 	}
 
 	

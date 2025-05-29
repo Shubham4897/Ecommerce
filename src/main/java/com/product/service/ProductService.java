@@ -45,7 +45,7 @@ public class ProductService {
 	product.setCreatedDate(createProductDate());
 	
 	
-		return repository.save(reqproduct);
+		return repository.save(product);
 	}
 
 	

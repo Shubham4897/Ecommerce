@@ -4,7 +4,7 @@ public class RequestSubCategory {
 
 	public String subName;
 	
-	long categoryId;
+	  long categoryId;
 	
 	public String getSubName() {
 		return subName;

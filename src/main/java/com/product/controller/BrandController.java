@@ -12,6 +12,7 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.product.entities.Brand;
+import com.product.entities.requests.BrandUpdateRequest;
 import com.product.service.BrandService;
 
 @RestController
@@ -29,7 +30,7 @@ public class BrandController {
 		 
 	}
 	@PutMapping("/updateBrand/{id}")
-	public String editBrand(@PathVariable Long id, @RequestBody Brand brand) {
+	public String editBrand(@PathVariable Long id, @RequestBody BrandUpdateRequest brand) {
 					brandservice.updateBrand(id, brand);
 					return "Brand Added";
 	}

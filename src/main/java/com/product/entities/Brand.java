@@ -59,6 +59,18 @@ public class Brand {
 	public void setUpdateDate(String updateDate) {
 		this.updateDate = updateDate;
 	}
+	public List<Product> getProduct() {
+		return product;
+	}
+	public void setProduct(List<Product> product) {
+		this.product = product;
+	}
+	public Category getCategory() {
+		return category;
+	}
+	public void setCategory(Category category) {
+		this.category = category;
+	}
 	
 	
 
