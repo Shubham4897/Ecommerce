@@ -21,10 +21,7 @@ public class CategoryService {
 		return categoryrepo.findAll();
 	}
 
-	public Optional<Category> GetCategoryById(Long id) {
-		// TODO Auto-generated method stub
-		return categoryrepo.findById(id);
-	}
+	
 
 	public Category CreateCategory(Category category) {
 			category.setCreatedCategoryDate(createCategoryDate());

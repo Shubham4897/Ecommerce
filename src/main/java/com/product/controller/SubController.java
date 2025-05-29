@@ -12,6 +12,7 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.product.entities.SubCategory;
+import com.product.entities.requests.RequestSubCategory;
 import com.product.service.SubService;
 
 @RestController
@@ -24,8 +25,8 @@ public class SubController {
 		return subservice.getSubAll();
 	}
 	@PostMapping("/CreateSub")
-	public SubCategory create(@RequestBody SubCategory subcategory) {
-		return subservice.CreateSubCategory(subcategory);
+	public SubCategory create(@RequestBody RequestSubCategory reqsubCategory ) {
+		return subservice.CreateSubCategory(reqsubCategory);
 	}
 	@PutMapping("/edit/{id}")
 	public String editSub(@PathVariable Long id, @RequestBody SubCategory subcategory) {

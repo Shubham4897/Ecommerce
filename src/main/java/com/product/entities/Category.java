@@ -1,14 +1,16 @@
 package com.product.entities;
 
+import java.util.List;
+
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
-import jakarta.persistence.Table;
+import jakarta.persistence.OneToMany;
+
 
 @Entity
-@Table(name="category")
 public class Category {
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -20,6 +22,13 @@ public class Category {
 	@Column
 	private String updatedCategoryDate;
 	
+	@OneToMany(mappedBy = "category")
+	private List<SubCategory> subcategory;
+	
+	@OneToMany(mappedBy = "category")
+	private List<Product> product;
+
+
 	public long getCategoryId() {
 		return categoryId;
 	}

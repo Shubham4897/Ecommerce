@@ -5,6 +5,8 @@ import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
+import jakarta.persistence.JoinColumn;
+import jakarta.persistence.ManyToOne;
 import jakarta.persistence.Table;
 
 @Entity
@@ -23,6 +25,15 @@ public class Product {
 	private String createdDate;
 	@Column
 	private String updatedDate;
+	
+	@ManyToOne
+	@JoinColumn(name="brandId")
+	private Brand brand;
+	
+
+	@JoinColumn(name="categoryId")
+	@ManyToOne
+	private Category category;
 	
 	public long getProductId() {
 		return productId;
@@ -59,6 +70,14 @@ public class Product {
 	}
 	public void setUpdatedDate(String updatedDate) {
 		this.updatedDate = updatedDate;
+	}
+	public void setBrand(Brand brand2) {
+		
+		
+	}
+	public void setCategory(Category category2) {
+		
+		
 	}
 	
 

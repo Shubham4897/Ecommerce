@@ -8,7 +8,12 @@ import java.util.Optional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import com.product.entities.Brand;
+import com.product.entities.Category;
 import com.product.entities.Product;
+import com.product.entities.requests.RequestProduct;
+import com.product.repository.BrandRepository;
+import com.product.repository.CategoryRepo;
 import com.product.repository.ProductRepository;
 
 @Service
@@ -16,36 +21,60 @@ public class ProductService {
 	@Autowired
 	private ProductRepository repository;
 
+	@Autowired
+	private BrandRepository brandRepo;	
+	@Autowired
+	private CategoryRepo categoryRepo;
+	
 	public List<Product> getAllProducts() {
 		return repository.findAll() ;
 	}
 
-	public Product CreateProduct(Product product) {
-		
-		product.setCreatedDate(createProductDate());
-		
-		return repository.save(product);
+	public Product CreateProduct(RequestProduct reqproduct) {	
+	Product product=new Product();
+	
+	Optional<Brand> brand=brandRepo.findById(reqproduct.getBrandId());
+	
+	Optional<Category> category=categoryRepo.findById(reqproduct.getCategoryId());
+	
+	product.setCategory(category.get());
+	product.setProductName(reqproduct.getProductName());
+	product.setDiscountedPrice(reqproduct.getDiscountedPrice());
+	product.setProductPrice(reqproduct.getProductPrice());
+	product.setBrand(brand.get());
+	product.setCreatedDate(createProductDate());
+	
+	
+		return repository.save(reqproduct);
 	}
 
-	public Optional<Product> productById(Long id) {
-		return repository.findById(id);
-	}
+	
 
-	public String updateProdById(Long id, Product product) {
+	public String updateProdById(Long id, RequestProduct product) {
 		Optional<Product> prods=repository.findById(id);
+		Optional<Brand> brand=brandRepo.findById(product.getBrandId());
+		
+		Optional<Category> category=categoryRepo.findById(product.getCategoryId());
+		
 		if(prods.isPresent()) {
 		Product exist	=prods.get();
+		exist.setBrand(brand.get());
+		exist.setCategory(category.get());
 		exist.setProductName(product.getProductName());
 		exist.setProductPrice(product.getProductPrice());
 		exist.setDiscountedPrice(product.getDiscountedPrice());
 		exist.setUpdatedDate(createProductDate());
-
+		
 		 repository.save(exist);
 		 return "updated"+" "+id+" succcesfully";
 		}
 		return "Not Added"+" "+id;
 		
 	}
+	
+	
+	
+
 
 	public String deleteProdById(Long id) {
 		repository.deleteById(id);
