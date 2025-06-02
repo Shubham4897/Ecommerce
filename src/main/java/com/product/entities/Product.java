@@ -1,5 +1,7 @@
 package com.product.entities;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
+
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
@@ -28,10 +30,12 @@ public class Product {
 	
 	@ManyToOne
 	@JoinColumn(name="brandId")
+	@JsonBackReference("brand-product")
 	private Brand brand;
 	
 
 	@JoinColumn(name="categoryId")
+	@JsonBackReference("category-product")
 	@ManyToOne
 	private Category category;
 	

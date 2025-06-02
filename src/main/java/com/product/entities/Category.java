@@ -2,6 +2,8 @@ package com.product.entities;
 
 import java.util.List;
 
+import com.fasterxml.jackson.annotation.JsonManagedReference;
+
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
@@ -23,9 +25,11 @@ public class Category {
 	private String updatedCategoryDate;
 	
 	@OneToMany(mappedBy = "category")
+	@JsonManagedReference("category-subcategory")
 	private List<SubCategory> subcategory;
 	
 	@OneToMany(mappedBy = "category")
+	@JsonManagedReference("category-product")
 	private List<Product> product;
 
 
@@ -52,6 +56,18 @@ public class Category {
 	}
 	public void setUpdatedCategoryDate(String updatedCategoryDate) {
 		this.updatedCategoryDate = updatedCategoryDate;
+	}
+	public List<SubCategory> getSubcategory() {
+		return subcategory;
+	}
+	public void setSubcategory(List<SubCategory> subcategory) {
+		this.subcategory = subcategory;
+	}
+	public List<Product> getProduct() {
+		return product;
+	}
+	public void setProduct(List<Product> product) {
+		this.product = product;
 	}
 	
 

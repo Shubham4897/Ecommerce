@@ -1,12 +1,13 @@
 package com.product.entities;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
+
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.JoinColumn;
 import jakarta.persistence.ManyToOne;
-
 import jakarta.persistence.Table;
 
 @Entity
@@ -24,6 +25,7 @@ public class SubCategory {
 	
 	@ManyToOne
 	@JoinColumn(name="category_Id")
+	@JsonBackReference("category-subcategory")
 	private Category category;
 	
 	
@@ -55,6 +57,10 @@ public class SubCategory {
 	public void setCategory(Category category) {
 		this.category = category;		
 	}
+	public Category getCategory() {
+		return category;
+	}
 
+	
 	
 }
