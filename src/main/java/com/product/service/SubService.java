@@ -29,12 +29,10 @@ public class SubService {
 	
 	}
 	public SubCategory CreateSubCategory(RequestSubCategory subCategory) {
-		System.out.println("-----"+ subCategory.getCategoryId());
 		SubCategory subcat=new SubCategory();
 		Optional<Category> cate=categoryRepo.findById(subCategory.getCategoryId());
-		if (cate.isEmpty()) {
-	        throw new RuntimeException("Category not found with ID: " + subCategory.getCategoryId());
-	    }		subcat.setCategory(cate.get());
+		
+	   	subcat.setCategory(cate.get());
 		subcat.setSubName(subCategory.getSubName());
 		subcat.setCreateDate(createSubDate());
 		return reposit.save(subcat);	

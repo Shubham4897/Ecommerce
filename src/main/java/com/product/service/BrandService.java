@@ -28,9 +28,13 @@ public class BrandService {
 
 	}
 
-	public Brand CreateBrand(Brand brand) {
-		brand.setCreateDate(createBrandDate());
-		return	brandrepo.save(brand);
+	public Brand CreateBrand(BrandUpdateRequest brand) {
+		Brand brands=new Brand();
+		Optional<Category> categoryOpt = categoryRepo.findById(brand.getCategoryId());
+		brands.setCategory(categoryOpt.get());
+		brands.setBrandName(brand.getBrandName());
+		brands.setCreateDate(createBrandDate());
+		return	brandrepo.save(brands);
 		 
 	}
 

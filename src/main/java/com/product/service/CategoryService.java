@@ -9,6 +9,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.product.entities.Category;
+import com.product.entities.requests.RequestCategory;
 import com.product.repository.CategoryRepo;
 
 @Service
@@ -23,9 +24,11 @@ public class CategoryService {
 
 	
 
-	public Category CreateCategory(Category category) {
-			category.setCreatedCategoryDate(createCategoryDate());
-		return categoryrepo.save(category);
+	public Category CreateCategory(RequestCategory category) {
+		Category cate=new Category();
+		cate.setCategoryName(category.getCategoryName());
+			cate.setCreatedCategoryDate(createCategoryDate());
+		return categoryrepo.save(cate);
 	}
 
 	public String updateProdById(Long id, Category category) {

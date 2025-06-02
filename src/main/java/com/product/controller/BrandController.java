@@ -25,7 +25,7 @@ public class BrandController {
 		return brandservice.getBrandList();
 	}
 	@PostMapping("/createBrand")
-	public Brand createBrand(@RequestBody Brand brand) {
+	public Brand createBrand(@RequestBody BrandUpdateRequest brand) {
 		return brandservice.CreateBrand(brand);
 		 
 	}
