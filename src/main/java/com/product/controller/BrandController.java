@@ -12,7 +12,6 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.product.entities.Brand;
-import com.product.entities.requests.BrandUpdateRequest;
 import com.product.service.BrandService;
 
 @RestController
@@ -25,12 +24,12 @@ public class BrandController {
 		return brandservice.getBrandList();
 	}
 	@PostMapping("/createBrand")
-	public Brand createBrand(@RequestBody BrandUpdateRequest brand) {
+	public Brand createBrand(@RequestBody Brand brand) {
 		return brandservice.CreateBrand(brand);
 		 
 	}
 	@PutMapping("/updateBrand/{id}")
-	public String editBrand(@PathVariable Long id, @RequestBody BrandUpdateRequest brand) {
+	public String editBrand(@PathVariable Long id, @RequestBody Brand brand) {
 					brandservice.updateBrand(id, brand);
 					return "Brand Added";
 	}

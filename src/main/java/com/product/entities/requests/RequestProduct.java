@@ -2,8 +2,6 @@ package com.product.entities.requests;
 
 public class RequestProduct {
 		
-
-	
 	public String productName;
 
 	public double productPrice;
@@ -14,24 +12,8 @@ public class RequestProduct {
 	private long brandId;
 	
 	private long categoryId;
-
-	public long getBrandId() {
-		return brandId;
-	}
-
-	public void setBrandId(long brandId) {
-		this.brandId = brandId;
-	}
-
-	public long getCategoryId() {
-		return categoryId;
-	}
-
-	public void setCategoryId(long categoryId) {
-		this.categoryId = categoryId;
-	}
-
 	
+	private long subId;
 
 	public String getProductName() {
 		return productName;
@@ -56,8 +38,30 @@ public class RequestProduct {
 	public void setDiscountedPrice(double discountedPrice) {
 		this.discountedPrice = discountedPrice;
 	}
-	
-	
-	
+
+	public long getBrandId() {
+		return brandId;
+	}
+
+	public void setBrandId(long brandId) {
+		this.brandId = brandId;
+	}
+
+	public long getCategoryId() {
+		return categoryId;
+	}
+
+	public void setCategoryId(long categoryId) {
+		this.categoryId = categoryId;
+	}
+
+	public long getSubId() {
+		return subId;
+	}
+
+	public void setSubId(long subId) {
+		this.subId = subId;
+	}
+
 	
 }

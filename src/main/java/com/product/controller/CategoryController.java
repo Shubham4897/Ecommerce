@@ -12,7 +12,6 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.product.entities.Category;
-import com.product.entities.requests.RequestCategory;
 import com.product.service.CategoryService;
 
 @RestController
@@ -26,7 +25,7 @@ public class CategoryController {
 	}
 	
 	@PostMapping("/createCategory")
-	public Category createCategory(@RequestBody RequestCategory category) {
+	public Category createCategory(@RequestBody Category category) {
 		return services.CreateCategory(category);	
 	}
 	@PutMapping("/updateCategory/{id}")

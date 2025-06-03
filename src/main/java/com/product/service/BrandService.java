@@ -9,44 +9,33 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.product.entities.Brand;
-import com.product.entities.Category;
-import com.product.entities.requests.BrandUpdateRequest;
 import com.product.repository.BrandRepository;
-import com.product.repository.CategoryRepo;
 
 @Service
 public class BrandService {
 	@Autowired
 	private BrandRepository brandrepo;
 	
-	
-	@Autowired
-	private CategoryRepo categoryRepo;
-	
 	public List<Brand> getBrandList() {
 		return brandrepo.findAll();
 
 	}
 
-	public Brand CreateBrand(BrandUpdateRequest brand) {
-		Brand brands=new Brand();
-		Optional<Category> categoryOpt = categoryRepo.findById(brand.getCategoryId());
-		brands.setCategory(categoryOpt.get());
-		brands.setBrandName(brand.getBrandName());
-		brands.setCreateDate(createBrandDate());
-		return	brandrepo.save(brands);
+	public Brand CreateBrand(Brand brand) {
+		brand.setBrandName(brand.getBrandName());
+		brand.setCreateDate(createBrandDate());
+		return	brandrepo.save(brand);
 		 
 	}
 
-	public String updateBrand(Long id, BrandUpdateRequest request) {
-				Optional<Brand> b1=brandrepo.findById(id);
-			    Optional<Category> categoryOpt = categoryRepo.findById(request.getCategoryId());
+	public String updateBrand(Long id, Brand brand) {
+						Optional<Brand> obj=brandrepo.findById(id);
 
-				if(b1.isPresent()) {
-					Brand exist = b1.get();
-			        exist.setBrandName(request.getBrandName());
+				if(obj.isPresent()) {
+					Brand exist = obj.get();
+			        exist.setBrandName(brand.getBrandName());
 			        exist.setUpdateDate(createBrandDate());
-			        exist.setCategory(categoryOpt.get());
+			       
 				brandrepo.save(exist);
 				return "Brand updated "+id;
 				}
@@ -54,25 +43,6 @@ public class BrandService {
 		// TODO Auto-generated method stub
 		
 	}
-	
-	
-//	public String updateBrand(Long id, BrandUpdateRequest request) {
-//	    Optional<Brand> b1 = brandrepo.findById(id);
-//	    Optional<Category> categoryOpt = categoryRepo.findById(request.getCategoryId());
-//
-//	    if (b1.isPresent() && categoryOpt.isPresent()) {
-//	        Brand exist = b1.get();
-//	        exist.setBrandName(request.getBrandName());
-//	        exist.setUpdateDate(createBrandDate());
-//	        exist.setCategory(categoryOpt.get());
-//
-//	        brandrepo.save(exist);
-//	        return "Brand updated " + id;
-//	    }
-//
-//	    return "Not updated " + id;
-//	}
-
 
 	public String DeleteBrandById(Long id) {
 				brandrepo.deleteById(id);

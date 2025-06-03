@@ -11,10 +11,12 @@ import org.springframework.stereotype.Service;
 import com.product.entities.Brand;
 import com.product.entities.Category;
 import com.product.entities.Product;
+import com.product.entities.SubCategory;
 import com.product.entities.requests.RequestProduct;
 import com.product.repository.BrandRepository;
 import com.product.repository.CategoryRepo;
 import com.product.repository.ProductRepository;
+import com.product.repository.SubRepository;
 
 @Service
 public class ProductService {
@@ -25,8 +27,12 @@ public class ProductService {
 	private BrandRepository brandRepo;	
 	@Autowired
 	private CategoryRepo categoryRepo;
+	@Autowired
+	private SubRepository subRepo;
 	
 	public List<Product> getAllProducts() {
+		
+		
 		return repository.findAll() ;
 	}
 
@@ -36,7 +42,10 @@ public class ProductService {
 	Optional<Brand> brand=brandRepo.findById(reqproduct.getBrandId());
 	
 	Optional<Category> category=categoryRepo.findById(reqproduct.getCategoryId());
+	Optional<SubCategory> subCategory=subRepo.findById(reqproduct.getSubId());
 	
+
+	product.setSubcategory(subCategory.get());
 	product.setCategory(category.get());
 	product.setProductName(reqproduct.getProductName());
 	product.setDiscountedPrice(reqproduct.getDiscountedPrice());
@@ -50,19 +59,19 @@ public class ProductService {
 
 	
 
-	public String updateProdById(Long id, RequestProduct product) {
+	public String updateProdById(Long id, RequestProduct reqproduct) {
 		Optional<Product> prods=repository.findById(id);
-		Optional<Brand> brand=brandRepo.findById(product.getBrandId());
-		
-		Optional<Category> category=categoryRepo.findById(product.getCategoryId());
+		Optional<Brand> brand=brandRepo.findById(reqproduct.getBrandId());
+		Optional<SubCategory> subCategory=subRepo.findById(reqproduct.getSubId());
+		Optional<Category> category=categoryRepo.findById(reqproduct.getCategoryId());
 		
 		if(prods.isPresent()) {
 		Product exist	=prods.get();
 		exist.setBrand(brand.get());
 		exist.setCategory(category.get());
-		exist.setProductName(product.getProductName());
-		exist.setProductPrice(product.getProductPrice());
-		exist.setDiscountedPrice(product.getDiscountedPrice());
+		exist.setProductName(reqproduct.getProductName());
+		exist.setProductPrice(reqproduct.getProductPrice());
+		exist.setDiscountedPrice(reqproduct.getDiscountedPrice());
 		exist.setUpdatedDate(createProductDate());
 		
 		 repository.save(exist);

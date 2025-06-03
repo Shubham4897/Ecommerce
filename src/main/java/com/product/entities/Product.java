@@ -1,9 +1,8 @@
 package com.product.entities;
 
-import com.fasterxml.jackson.annotation.JsonBackReference;
-
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
+import jakarta.persistence.FetchType;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
@@ -28,75 +27,92 @@ public class Product {
 	@Column
 	private String updatedDate;
 	
-	@ManyToOne
+	@ManyToOne(fetch = FetchType.LAZY)
 	@JoinColumn(name="brandId")
-	@JsonBackReference("brand-product")
 	private Brand brand;
 	
 
 	@JoinColumn(name="categoryId")
-	@JsonBackReference("category-product")
-	@ManyToOne
+	@ManyToOne(fetch = FetchType.LAZY)
 	private Category category;
 	
+	@JoinColumn(name="subId")
+	@ManyToOne(fetch = FetchType.LAZY)
+	private SubCategory subcategory;
+
 	public long getProductId() {
 		return productId;
 	}
+
 	public void setProductId(long productId) {
 		this.productId = productId;
 	}
+
 	public String getProductName() {
 		return productName;
 	}
+
 	public void setProductName(String productName) {
 		this.productName = productName;
 	}
+
 	public double getProductPrice() {
 		return productPrice;
 	}
+
 	public void setProductPrice(double productPrice) {
 		this.productPrice = productPrice;
 	}
+
 	public double getDiscountedPrice() {
 		return discountedPrice;
 	}
+
 	public void setDiscountedPrice(double discountedPrice) {
 		this.discountedPrice = discountedPrice;
 	}
+
 	public String getCreatedDate() {
 		return createdDate;
 	}
+
 	public void setCreatedDate(String createdDate) {
 		this.createdDate = createdDate;
 	}
+
 	public String getUpdatedDate() {
 		return updatedDate;
 	}
+
 	public void setUpdatedDate(String updatedDate) {
 		this.updatedDate = updatedDate;
 	}
-//	public void setBrand(Brand brand2) {
-//		
-//		
-//	}
-//	public void setCategory(Category category2) {
-//		
-//		
-//	}
+
 	public Brand getBrand() {
 		return brand;
 	}
+
 	public void setBrand(Brand brand) {
 		this.brand = brand;
 	}
+
 	public Category getCategory() {
 		return category;
 	}
+
 	public void setCategory(Category category) {
 		this.category = category;
+	}
+
+	public SubCategory getSubcategory() {
+		return subcategory;
+	}
+
+	public void setSubcategory(SubCategory subcategory) {
+		this.subcategory = subcategory;
 	}
 	
 	
 	
-
+	
 }
