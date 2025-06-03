@@ -40,10 +40,8 @@ public class ProductService {
 	Product product=new Product();
 	
 	Optional<Brand> brand=brandRepo.findById(reqproduct.getBrandId());
-	
 	Optional<Category> category=categoryRepo.findById(reqproduct.getCategoryId());
 	Optional<SubCategory> subCategory=subRepo.findById(reqproduct.getSubId());
-	
 
 	product.setSubcategory(subCategory.get());
 	product.setCategory(category.get());
@@ -62,11 +60,12 @@ public class ProductService {
 	public String updateProdById(Long id, RequestProduct reqproduct) {
 		Optional<Product> prods=repository.findById(id);
 		Optional<Brand> brand=brandRepo.findById(reqproduct.getBrandId());
-		Optional<SubCategory> subCategory=subRepo.findById(reqproduct.getSubId());
+		Optional<SubCategory> subcategory=subRepo.findById(reqproduct.getSubId());
 		Optional<Category> category=categoryRepo.findById(reqproduct.getCategoryId());
 		
 		if(prods.isPresent()) {
-		Product exist	=prods.get();
+		Product exist=prods.get();
+		exist.setSubcategory(subcategory.get());
 		exist.setBrand(brand.get());
 		exist.setCategory(category.get());
 		exist.setProductName(reqproduct.getProductName());
