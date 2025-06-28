@@ -4,10 +4,8 @@ import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.List;
 import java.util.Optional;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-
 import com.product.entities.Brand;
 import com.product.entities.Category;
 import com.product.entities.Product;
@@ -30,32 +28,38 @@ public class ProductService {
 	@Autowired
 	private SubRepository subRepo;
 	
+	
+	//Get List
 	public List<Product> getAllProducts() {
-		
-		
 		return repository.findAll() ;
 	}
 
 	public Product CreateProduct(RequestProduct reqproduct) {	
 	Product product=new Product();
-	
+	System.out.println("Dicount Price "+reqproduct.discountedPrice + "Percentage "+reqproduct.discountPercent);
 	Optional<Brand> brand=brandRepo.findById(reqproduct.getBrandId());
 	Optional<Category> category=categoryRepo.findById(reqproduct.getCategoryId());
 	Optional<SubCategory> subCategory=subRepo.findById(reqproduct.getSubId());
 
 	product.setSubcategory(subCategory.get());
 	product.setCategory(category.get());
-	product.setProductName(reqproduct.getProductName());
-	product.setDiscountedPrice(reqproduct.getDiscountedPrice());
-	product.setProductPrice(reqproduct.getProductPrice());
 	product.setBrand(brand.get());
+	product.setProductName(reqproduct.getProductName());
+	product.setDiscountedPrice(calculateDiscountedPrice(reqproduct.getProductPrice(), reqproduct.discountPercent));
+	product.setProductPrice(reqproduct.getProductPrice());
+	product.setColor(reqproduct.getColor());
+	product.setDimensions(reqproduct.getDimensions());
+	product.setMaterial(reqproduct.getMaterial());
+	product.setModel(reqproduct.getModel());
+	product.setSku(reqproduct.getSku());
+	product.setStockQuantity(reqproduct.getStockQuantity());
+	product.setWeight(reqproduct.getWeight());
+	product.setDescription(reqproduct.getDescription());
+	product.setImageUrl(reqproduct.getImageUrl()); // Added imageUrl
+
 	product.setCreatedDate(createProductDate());
-	
-	
 		return repository.save(product);
 	}
-
-	
 
 	public String updateProdById(Long id, RequestProduct reqproduct) {
 		Optional<Product> prods=repository.findById(id);
@@ -71,6 +75,7 @@ public class ProductService {
 		exist.setProductName(reqproduct.getProductName());
 		exist.setProductPrice(reqproduct.getProductPrice());
 		exist.setDiscountedPrice(reqproduct.getDiscountedPrice());
+		exist.setImageUrl(reqproduct.getImageUrl()); // Added imageUrl
 		exist.setUpdatedDate(createProductDate());
 		
 		 repository.save(exist);
@@ -103,5 +108,23 @@ public class ProductService {
        return formattedDate;
     }
 
+	
+	 public  double calculateDiscountedPrice(double originalPrice, double discountPercentage) {
+	        
+	        if (originalPrice < 0) {
+	            throw new IllegalArgumentException("Original price cannot be negative.");
+	        }
+	        
+	        if (discountPercentage < 0 || discountPercentage > 100) {
+	            throw new IllegalArgumentException("Discount percentage must be between 0 and 100.");
+	        }
+
+	        
+	        double discountAmount = (originalPrice * discountPercentage) / 100;
+
+	        double discountedPrice = originalPrice - discountAmount;
+
+	        return discountedPrice;
+	    }
 
 }

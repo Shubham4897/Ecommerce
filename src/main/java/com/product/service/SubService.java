@@ -7,10 +7,7 @@ import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-
-
 import com.product.entities.SubCategory;
-
 import com.product.repository.SubRepository;
 
 @Service
@@ -19,8 +16,7 @@ public class SubService {
    
 	@Autowired
 	private SubRepository reposit;
-   
-
+ 
 	public List<SubCategory> getSubAll() {
 		return reposit.findAll();
 	
@@ -35,20 +31,20 @@ public class SubService {
 	public String UpdateSub(Long id, SubCategory subcategory) {
 				Optional<SubCategory> ob=reposit.findById(id);
 				if(ob.isPresent()) {
-							SubCategory exists=ob.get();
+						SubCategory exists=ob.get();
 						exists.setSubName(subcategory.getSubName());
 						exists.setUpdateDate(createSubDate());
 						reposit.save(exists);
 						return "Added";
 				}else {
-		return "Not added";
+						return "Not added";
 				}
 	}
-
 	public String deleteSub(Long id) {
-		reposit.deleteById(id);	
 		
-		return id+"deleted";
+		reposit.deleteById(id);	
+	
+		return id+" deleted";
 	}
 	
 	public String createSubDate() {

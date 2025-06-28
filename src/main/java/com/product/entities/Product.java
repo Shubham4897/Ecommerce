@@ -15,29 +15,48 @@ import jakarta.persistence.Table;
 public class Product {
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	private long productId;
-	@Column
-	private String productName;
-	@Column
-	private double productPrice;
-	@Column
-	private double discountedPrice;
+	 private long productId;
+	 @Column
+	 private String productName;
+	 @Column
+	 private double productPrice;
+	 @Column
+	 private double discountedPrice;
+	 @Column
+	 private String description;
+	 @Column
+	 private String imageUrl;
+	 @Column
+     private int stockQuantity;
+     @Column
+     private String sku;
+     @Column
+     private String model;
+     @Column
+     private String dimensions;
+     @Column
+     private long weight;
+     @Column
+     private String material;
+     @Column
+     private String color;
+	
 	@Column
 	private String createdDate;
 	@Column
 	private String updatedDate;
 	
-	@ManyToOne(fetch = FetchType.LAZY)
+	@ManyToOne(fetch = FetchType.EAGER)
 	@JoinColumn(name="brandId")
 	private Brand brand;
 	
 
 	@JoinColumn(name="categoryId")
-	@ManyToOne(fetch = FetchType.LAZY)
+	@ManyToOne(fetch = FetchType.EAGER)
 	private Category category;
 	
 	@JoinColumn(name="subId")
-	@ManyToOne(fetch = FetchType.LAZY)
+	@ManyToOne(fetch = FetchType.EAGER)
 	private SubCategory subcategory;
 
 	public long getProductId() {
@@ -110,6 +129,78 @@ public class Product {
 
 	public void setSubcategory(SubCategory subcategory) {
 		this.subcategory = subcategory;
+	}
+
+	public String getDescription() {
+		return description;
+	}
+
+	public void setDescription(String description) {
+		this.description = description;
+	}
+
+	public int getStockQuantity() {
+		return stockQuantity;
+	}
+
+	public void setStockQuantity(int stockQuantity) {
+		this.stockQuantity = stockQuantity;
+	}
+
+	public String getSku() {
+		return sku;
+	}
+
+	public void setSku(String sku) {
+		this.sku = sku;
+	}
+
+	public String getModel() {
+		return model;
+	}
+
+	public void setModel(String model) {
+		this.model = model;
+	}
+
+	public String getDimensions() {
+		return dimensions;
+	}
+
+	public void setDimensions(String dimensions) {
+		this.dimensions = dimensions;
+	}
+
+	public long getWeight() {
+		return weight;
+	}
+
+	public void setWeight(long weight) {
+		this.weight = weight;
+	}
+
+	public String getMaterial() {
+		return material;
+	}
+
+	public void setMaterial(String material) {
+		this.material = material;
+	}
+
+	public String getColor() {
+		return color;
+	}
+
+	public void setColor(String color) {
+		this.color = color;
+	}
+
+	public String getImageUrl() {
+		return imageUrl;
+	}
+
+	public void setImageUrl(String imageUrl) {
+		this.imageUrl = imageUrl;
 	}
 	
 	

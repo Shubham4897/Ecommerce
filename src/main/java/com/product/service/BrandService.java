@@ -9,12 +9,17 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.product.entities.Brand;
+
 import com.product.repository.BrandRepository;
+import com.product.repository.ProductRepository;
 
 @Service
 public class BrandService {
 	@Autowired
 	private BrandRepository brandrepo;
+	
+	@Autowired
+	ProductRepository productRepo;
 	
 	public List<Brand> getBrandList() {
 		return brandrepo.findAll();
@@ -45,7 +50,13 @@ public class BrandService {
 	}
 
 	public String DeleteBrandById(Long id) {
-				brandrepo.deleteById(id);
+		
+//		Optional<Brand> brand=brandrepo.findById(id);
+//		List<Product> productList=productRepo.findByBrand(brand.get());
+//		for(Product pro:productList) {
+//			productRepo.delete(pro);
+//}
+	brandrepo.deleteById(id);
 		return id+" deleted Successfully";
 		// TODO Auto-generated method stub
 		
@@ -64,4 +75,6 @@ public class BrandService {
         // Print or use the formatted date string
        return formattedDate;
     }
+
+	
 }

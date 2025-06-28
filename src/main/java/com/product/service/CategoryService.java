@@ -6,6 +6,7 @@ import java.util.List;
 import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 
 import com.product.entities.Category;
@@ -23,12 +24,17 @@ public class CategoryService {
 
 	
 
-	public Category CreateCategory(Category category) {
+	public ResponseEntity<?> createCategory(Category category) {
+		if(category.getCategoryName()==null||category.getCategoryName().isEmpty()||category.getCategoryName().isBlank()) {
+			return ResponseEntity.ok("this field should Not be emptu or null");
+		}
+		
 		category.setCreatedCategoryDate(createCategoryDate());
-		return categoryrepo.save(category);
+		categoryrepo.save(category);
+		return ResponseEntity.ok("Category Saved successfully");
 
+	
 	}
-
 	public String updateProdById(Long id, Category category) {
 		Optional<Category> cate=categoryrepo.findById(id);
 		if(cate.isPresent()) {
