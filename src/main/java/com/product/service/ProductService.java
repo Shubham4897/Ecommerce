@@ -28,7 +28,6 @@ public class ProductService {
 	@Autowired
 	private SubRepository subRepo;
 	
-	
 	//Get List
 	public List<Product> getAllProducts() {
 		return repository.findAll() ;
@@ -36,7 +35,6 @@ public class ProductService {
 
 	public Product CreateProduct(RequestProduct reqproduct) {	
 	Product product=new Product();
-	System.out.println("Dicount Price "+reqproduct.discountedPrice + "Percentage "+reqproduct.discountPercent);
 	Optional<Brand> brand=brandRepo.findById(reqproduct.getBrandId());
 	Optional<Category> category=categoryRepo.findById(reqproduct.getCategoryId());
 	Optional<SubCategory> subCategory=subRepo.findById(reqproduct.getSubId());

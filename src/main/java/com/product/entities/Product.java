@@ -1,5 +1,7 @@
 package com.product.entities;
 
+import java.util.List;
+
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.FetchType;
@@ -8,6 +10,7 @@ import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.JoinColumn;
 import jakarta.persistence.ManyToOne;
+import jakarta.persistence.OneToMany;
 import jakarta.persistence.Table;
 
 @Entity
@@ -49,7 +52,6 @@ public class Product {
 	@ManyToOne(fetch = FetchType.EAGER)
 	@JoinColumn(name="brandId")
 	private Brand brand;
-	
 
 	@JoinColumn(name="categoryId")
 	@ManyToOne(fetch = FetchType.EAGER)
@@ -58,6 +60,10 @@ public class Product {
 	@JoinColumn(name="subId")
 	@ManyToOne(fetch = FetchType.EAGER)
 	private SubCategory subcategory;
+	
+	@OneToMany(mappedBy = "product")
+
+	private List<CartManager> cart;
 
 	public long getProductId() {
 		return productId;
@@ -91,52 +97,20 @@ public class Product {
 		this.discountedPrice = discountedPrice;
 	}
 
-	public String getCreatedDate() {
-		return createdDate;
-	}
-
-	public void setCreatedDate(String createdDate) {
-		this.createdDate = createdDate;
-	}
-
-	public String getUpdatedDate() {
-		return updatedDate;
-	}
-
-	public void setUpdatedDate(String updatedDate) {
-		this.updatedDate = updatedDate;
-	}
-
-	public Brand getBrand() {
-		return brand;
-	}
-
-	public void setBrand(Brand brand) {
-		this.brand = brand;
-	}
-
-	public Category getCategory() {
-		return category;
-	}
-
-	public void setCategory(Category category) {
-		this.category = category;
-	}
-
-	public SubCategory getSubcategory() {
-		return subcategory;
-	}
-
-	public void setSubcategory(SubCategory subcategory) {
-		this.subcategory = subcategory;
-	}
-
 	public String getDescription() {
 		return description;
 	}
 
 	public void setDescription(String description) {
 		this.description = description;
+	}
+
+	public String getImageUrl() {
+		return imageUrl;
+	}
+
+	public void setImageUrl(String imageUrl) {
+		this.imageUrl = imageUrl;
 	}
 
 	public int getStockQuantity() {
@@ -195,15 +169,55 @@ public class Product {
 		this.color = color;
 	}
 
-	public String getImageUrl() {
-		return imageUrl;
+	public String getCreatedDate() {
+		return createdDate;
 	}
 
-	public void setImageUrl(String imageUrl) {
-		this.imageUrl = imageUrl;
+	public void setCreatedDate(String createdDate) {
+		this.createdDate = createdDate;
+	}
+
+	public String getUpdatedDate() {
+		return updatedDate;
+	}
+
+	public void setUpdatedDate(String updatedDate) {
+		this.updatedDate = updatedDate;
+	}
+
+	public Brand getBrand() {
+		return brand;
+	}
+
+	public void setBrand(Brand brand) {
+		this.brand = brand;
+	}
+
+	public Category getCategory() {
+		return category;
+	}
+
+	public void setCategory(Category category) {
+		this.category = category;
+	}
+
+	public SubCategory getSubcategory() {
+		return subcategory;
+	}
+
+	public void setSubcategory(SubCategory subcategory) {
+		this.subcategory = subcategory;
+	}
+
+	public List<CartManager> getCart() {
+		return cart;
+	}
+
+	public void setCart(List<CartManager> cart) {
+		this.cart = cart;
 	}
 	
 	
-	
-	
+
+
 }

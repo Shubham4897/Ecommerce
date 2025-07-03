@@ -4,6 +4,7 @@ import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.util.List;
 import java.util.Optional;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
@@ -15,6 +16,7 @@ import com.product.repository.UserRepository;
 public class UserService {
 	@Autowired
 	private UserRepository userrepository;
+	
 
 	public List<Users> getUserList() {
 		return userrepository.findAll();
@@ -36,8 +38,6 @@ public class UserService {
 		if(user.isPresent()) {
 			Users exist=user.get();
 			exist.setUserName(users.getUserName());
-			exist.setPassword(users.getPassword());
-			exist.setEmail(users.getEmail());
 			exist.setUpdatedDate(getCurrentDateTime());
 			userrepository.save(exist);
 			return ResponseEntity.ok(id+" Updated Successfully");

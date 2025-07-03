@@ -14,6 +14,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.product.entities.CartManager;
+import com.product.entities.requests.CartManagerDTO;
 import com.product.service.CartService;
 
 @RestController
@@ -27,12 +28,12 @@ public class CartController {
 		return cartservice.getCartList();
 	}
 	@PostMapping
-	public ResponseEntity<?> createCart(@RequestBody CartManager cartmanager){
-		return cartservice.createCarts(cartmanager);
+	public ResponseEntity<?> createCart(@RequestBody CartManagerDTO cartDto){
+		return cartservice.createCarts(cartDto);
 	}
 	@PutMapping("/{id}")
-	public ResponseEntity<?> updateCart(@RequestBody CartManager cartmanager, @PathVariable Long id){
-		return cartservice.editCart(cartmanager,id);
+	public ResponseEntity<?> updateCart(@RequestBody CartManagerDTO cartDto, @PathVariable Long id){
+		return cartservice.editCart(cartDto,id);
 		
 	}
 	@DeleteMapping("/{id}")

@@ -1,9 +1,12 @@
 package com.product.entities;
 
+import java.util.List;
+
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
+import jakarta.persistence.OneToMany;
 import jakarta.persistence.Table;
 
 @Entity
@@ -14,10 +17,21 @@ public class Users {
 	    @GeneratedValue(strategy = GenerationType.IDENTITY)
 	    private Long userId;
 	    private String userName;
-	    private String email;
-	    private String password;
 	    private String createdDate;
 	    private String updatedDate;
+	    
+	    @OneToMany(mappedBy = "user")
+	
+		private List<CartManager> cart;
+	    
+	    
+	    
+		public List<CartManager> getCart() {
+			return cart;
+		}
+		public void setCart(List<CartManager> cart) {
+			this.cart = cart;
+		}
 		public Long getUserId() {
 			return userId;
 		}
@@ -29,18 +43,6 @@ public class Users {
 		}
 		public void setUserName(String userName) {
 			this.userName = userName;
-		}
-		public String getEmail() {
-			return email;
-		}
-		public void setEmail(String email) {
-			this.email = email;
-		}
-		public String getPassword() {
-			return password;
-		}
-		public void setPassword(String password) {
-			this.password = password;
 		}
 		public String getCreatedDate() {
 			return createdDate;
@@ -54,7 +56,5 @@ public class Users {
 		public void setUpdatedDate(String updatedDate) {
 			this.updatedDate = updatedDate;
 		}
-	    
-	    
 
 }
